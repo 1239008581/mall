@@ -58,11 +58,11 @@ public class FootprintController {
     @ApiOperation("添加用户足迹API")
     @ApiImplicitParam(name = "footprint", value = "添加足迹的信息，商品id不能为空", dataType = "Footprint", paramType = "body")
     public Integer addFootprint(@RequestAttribute("userId") Integer userId, @RequestBody Footprint footprint) {
-        if (footprint.getCommondityId() == null) {
+        if (footprint.getCommodityId() == null) {
             throw new IllegalArgumentException("缺少必要参数！");
         }
         footprint.setUserId(userId);
-        footprint.setTime(new Date());
+        footprint.setCreateTime(new Date());
         return footprintService.insert(footprint);
     }
 
