@@ -31,7 +31,7 @@ public class HeaderTokenInterceptor extends HandlerInterceptorAdapter {
             Integer userId = (Integer) claims.get("userId");
             request.setAttribute("userId",userId);
         }catch(Throwable throwable){
-            request.setAttribute("userId",null);
+            request.setAttribute("userId",-1);
         }
         return true;
     }

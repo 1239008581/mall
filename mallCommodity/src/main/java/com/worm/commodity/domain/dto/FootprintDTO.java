@@ -29,7 +29,7 @@ public class FootprintDTO {
     /**
      * 商品id
      */
-    private Integer commondityId;
+    private Integer commodityId;
 
     /**
      * 访问时间

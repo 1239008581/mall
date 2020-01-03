@@ -26,3 +26,10 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+feign:
+  client:
+    config:
+      mall-user:
+        requestInterceptors:
+          - com.worm.commodity.interceptor.FeignHeaderInterceptor
+

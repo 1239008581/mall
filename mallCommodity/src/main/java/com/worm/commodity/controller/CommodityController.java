@@ -32,9 +32,7 @@ public class CommodityController {
         if (userId != null) {
             userFeignClient.addFootprint(
                     FootprintDTO.builder()
-                            .userId(userId)
-                            .commondityId(id)
-                            .createTime(new Date())
+                            .commodityId(id)
                             .build()
             );
         }
