@@ -34,5 +34,5 @@ public class FootprintDTO {
     /**
      * 访问时间
      */
-    private Date time;
+    private Date createTime;
 }

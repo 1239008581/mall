@@ -2,6 +2,7 @@ package com.worm.commodity.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.worm.commodity.domain.dto.FootprintDTO;
+import com.worm.commodity.feignclient.UserFeignClient;
 import com.worm.constant.CommodityConstant;
 import com.worm.commodity.domain.entity.Commodity;
 import com.worm.commodity.service.CommodityService;
@@ -22,17 +23,20 @@ import java.util.Date;
 public class CommodityController {
 
     private final CommodityService commodityService;
+    private final UserFeignClient userFeignClient;
 
     @GetMapping("/findCommodity/{id}")
     @ApiOperation("查询商品API")
     @ApiImplicitParam(name = "id", value = "查询商品的id", dataType = "int", paramType = "path")
-    public Commodity findCommodity(@RequestAttribute("id") Integer userId,@PathVariable("id") Integer id) {
-        if (userId != null){
-            FootprintDTO.builder()
-                    .userId(userId)
-                    .commondityId(id)
-                    .time(new Date())
-                    .build();
+    public Commodity findCommodity(@RequestAttribute("id") Integer userId, @PathVariable("id") Integer id) {
+        if (userId != null) {
+            userFeignClient.addFootprint(
+                    FootprintDTO.builder()
+                            .userId(userId)
+                            .commondityId(id)
+                            .createTime(new Date())
+                            .build()
+            );
         }
         return commodityService.findById(id);
     }
