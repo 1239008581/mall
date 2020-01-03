@@ -28,7 +28,7 @@ public class CommodityController {
     @GetMapping("/findCommodity/{id}")
     @ApiOperation("查询商品API")
     @ApiImplicitParam(name = "id", value = "查询商品的id", dataType = "int", paramType = "path")
-    public Commodity findCommodity(@RequestAttribute("id") Integer userId, @PathVariable("id") Integer id) {
+    public Commodity findCommodity(@RequestAttribute("userId") Integer userId, @PathVariable("id") Integer id) {
         if (userId != null) {
             userFeignClient.addFootprint(
                     FootprintDTO.builder()
