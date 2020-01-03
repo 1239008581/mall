@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mallCommodity" />
+        <module name="mallCommon" />
+        <module name="mallUser" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dependencies" target="1.8" />
+      <module name="mallCommodity" target="1.8" />
+      <module name="mallCommon" target="1.8" />
+      <module name="mallUser" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.worm.user.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.worm.user.domain.entity.User">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="wx_nickname" jdbcType="VARCHAR" property="wxNickname" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="money" jdbcType="REAL" property="money" />
+  </resultMap>
+</mapper>

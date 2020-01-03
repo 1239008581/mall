@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.worm.commodity.dao.CommodityMapper">
+  <resultMap id="BaseResultMap" type="com.worm.commodity.domain.entity.Commodity">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="sale_num" jdbcType="INTEGER" property="saleNum" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="classify_id" jdbcType="INTEGER" property="classifyId" />
+    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+    <result column="price" jdbcType="REAL" property="price" />
+  </resultMap>
+</mapper>

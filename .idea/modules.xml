@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/dependencies/dependencies.iml" filepath="$PROJECT_DIR$/dependencies/dependencies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mall.iml" filepath="$PROJECT_DIR$/.idea/mall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mallCommodity/mallCommodity.iml" filepath="$PROJECT_DIR$/mallCommodity/mallCommodity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mallCommon/mallCommon.iml" filepath="$PROJECT_DIR$/mallCommon/mallCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mallUser/mallUser.iml" filepath="$PROJECT_DIR$/mallUser/mallUser.iml" />
+    </modules>
+  </component>
+</project>

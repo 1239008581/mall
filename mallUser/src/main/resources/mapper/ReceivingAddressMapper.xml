@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.worm.user.dao.ReceivingAddressMapper">
+  <resultMap id="BaseResultMap" type="com.worm.user.domain.entity.ReceivingAddress">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_Id" jdbcType="INTEGER" property="userId" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_telephone" jdbcType="VARCHAR" property="userTelephone" />
+  </resultMap>
+</mapper>
