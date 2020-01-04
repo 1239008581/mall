@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "order")
+@Table(name = "`order`")
 public class Order {
     /**
      * 订单id

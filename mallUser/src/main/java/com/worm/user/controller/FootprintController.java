@@ -38,8 +38,8 @@ public class FootprintController {
 
     @PostMapping("/deleteFootprint")
     @ApiOperation("批量删除用户足迹API")
-    @ApiImplicitParam(name = "Footprints", value = "需要的删除的足迹列表", dataType = "int", paramType = "body")
-    public JsonResult deleteFootprint(List<Integer> FootprintIds) {
+    @ApiImplicitParam(name = "FootprintIds", value = "需要的删除的足迹列表", dataType = "int", paramType = "body")
+    public JsonResult deleteFootprint(@RequestBody List<Integer> FootprintIds) {
         int result = footprintService.batchDeleteById(FootprintIds);
         return JsonResult.ok(result);
     }
