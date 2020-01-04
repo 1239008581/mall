@@ -41,5 +41,6 @@ public class Shopping {
     /**
      * 总金额
      */
-    private Float price;
+    @Column(name = "total_price")
+    private Float totalPrice;
 }

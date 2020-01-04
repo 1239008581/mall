@@ -6,6 +6,7 @@ import com.worm.service.BaseService;
 import com.worm.utils.MyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BaseServiceImpl<T, M extends MyMapper<T>> implements BaseService<T> {
@@ -48,9 +49,18 @@ public class BaseServiceImpl<T, M extends MyMapper<T>> implements BaseService<T>
     }
 
     @Override
+    public List<T> findById(List<Integer> idList) {
+        List<T> list = new ArrayList<>();
+        for (Integer id : idList) {
+            list.add(m.selectByPrimaryKey(id));
+        }
+        return list;
+    }
+
+    @Override
     public int batchDeleteById(List<Integer> objects) {
         int result = 0;
-        for (Object object:objects) {
+        for (Object object : objects) {
             m.deleteByPrimaryKey(object);
             result++;
         }
@@ -59,14 +69,14 @@ public class BaseServiceImpl<T, M extends MyMapper<T>> implements BaseService<T>
 
     @Override
     public PageInfo<T> findPage(Integer page, Integer pageSize, T t) {
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         List<T> list = m.select(t);
         return new PageInfo<>(list);
     }
 
     @Override
     public PageInfo<T> findAllPage(Integer page, Integer pageSize) {
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         List<T> list = m.selectAll();
         return new PageInfo<>(list);
     }

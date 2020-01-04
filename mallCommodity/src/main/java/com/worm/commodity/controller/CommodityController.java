@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Api(tags = "商品相关功能")
 @RestController
@@ -45,6 +46,13 @@ public class CommodityController {
     public JsonResult findAllCommodity(@RequestParam(required = false, defaultValue = "1") Integer page) {
         PageInfo<Commodity> pageInfo = commodityService.findAllPage(page, CommodityConstant.CommodityPageSize);
         return JsonResult.ok(pageInfo);
+    }
+
+    @PostMapping("/findCommodityList")
+    @ApiOperation("通过商品列表获取商品列表")
+    @ApiImplicitParam(name = "idList",value = "商品id列表",dataType = "int",paramType = "body")
+    public List<Commodity> findCommodityList(@RequestBody List<Integer> idList){
+        return commodityService.findById(idList);
     }
 
     /*以下API受到限制无法使用

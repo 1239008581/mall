@@ -25,7 +25,7 @@ public class ReceivingAddressController {
     @ApiOperation("用户添加一个收货地址API")
     @ApiImplicitParam(name = "receivingAddress", value = "收货地址的数据体", dataType = "ReceivingAddress", paramType = "body")
     public JsonResult addReceivingAddress(@RequestAttribute("userId") Integer userId, @RequestBody ReceivingAddress receivingAddress) {
-        if (receivingAddress.getAddress() == null || receivingAddress.getRegion() == null || receivingAddress.getUserName() == null || receivingAddress.getUserTelephone() == null) {
+        if (receivingAddress.getAddress() == null || receivingAddress.getProvince() == null || receivingAddress.getUserName() == null || receivingAddress.getUserTelephone() == null) {
             throw new IllegalArgumentException("缺少必要参数！");
         }
         receivingAddress.setUserId(userId);
@@ -43,11 +43,9 @@ public class ReceivingAddressController {
 
     @PostMapping("/updateReceivingAddress")
     @ApiOperation("用户修改收货地址API")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "receivingAddress", value = "需要修改的收货地址,id不能为空", paramType = "body")
-    })
+            @ApiImplicitParam(name = "receivingAddress", value = "需要修改的收货地址,id不能为空", dataType = "ReceivingAddress",paramType = "body")
     public JsonResult updateReceivingAddress(@RequestBody ReceivingAddress receivingAddress) {
-        if (receivingAddress.getId() == null){
+        if (receivingAddress.getId() == null) {
             throw new IllegalArgumentException("缺少必要参数！");
         }
         int result = receivingAddressService.updateById(receivingAddress);
@@ -56,9 +54,7 @@ public class ReceivingAddressController {
 
     @GetMapping("/findReceivingAddress")
     @ApiOperation("分页查询所有收货地址")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "分页查询的页码", dataType = "int", paramType = "path")
-    })
+    @ApiImplicitParam(name = "page", value = "分页查询的页码", dataType = "int", paramType = "path")
     public JsonResult findReceivingAddress(@RequestAttribute("userId") Integer userId, @RequestParam(required = false, defaultValue = "1") Integer page) {
         ReceivingAddress receivingAddress = ReceivingAddress.builder()
                 .userId(userId)
@@ -66,5 +62,13 @@ public class ReceivingAddressController {
         PageInfo<ReceivingAddress> pageInfo = receivingAddressService.findPage(page, UserConstant.ReceivingAddressPageSize, receivingAddress);
         return JsonResult.ok(pageInfo);
     }
+
+    @GetMapping("/getReceivingAddress/{id}")
+    @ApiOperation("通过id查询收货地址")
+    @ApiImplicitParam(name = "id",value = "收货地址的id",dataType = "int",paramType = "query")
+    public ReceivingAddress getReceivingAddress(@PathVariable("id") Integer id){
+        return receivingAddressService.findById(id);
+    }
+
 
 }

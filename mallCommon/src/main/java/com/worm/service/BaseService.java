@@ -32,6 +32,7 @@ public interface BaseService<T> {
 
     /**
      * 根据要求批量删除
+     *
      * @param t 删除的标准
      * @return
      */
@@ -44,6 +45,14 @@ public interface BaseService<T> {
      * @return
      */
     T findById(Object id);
+
+    /**
+     * 通过id列表查询对象列表
+     *
+     * @param idList
+     * @return
+     */
+    List<T> findById(List<Integer> idList);
 
     /**
      * 通过主键列表批量删除对象

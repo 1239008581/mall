@@ -27,46 +27,46 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, OrderMapper> implem
 
     @Override
     public Boolean payOrders(ShoppingCartDTO shoppingCartDTO) throws PayException {
-        //获取购物车信息
-        Integer userId = shoppingCartDTO.getUserId();
-        List<Integer> orderIds = shoppingCartDTO.getOrderIds();
-        Integer totalPrice = shoppingCartDTO.getTotalPrice();
-        //获取支付用户初始信息,判断用户余额是否足够完成支付
-        User user = userMapper.selectByPrimaryKey(userId);
-        Float money = user.getMoney();
-        if (money < totalPrice) {
-            throw new PayException("用户余额不足！");
-        }
-        //循环为所有订单付款
-        for (Integer orderId : orderIds) {
-            //获取订单信息并判断订单是否已经被支付了
-            Order order = orderMapper.selectByPrimaryKey(orderId);
-            if (order.getStatus() == 1) {
-                throw new PayException("订单已支付，无法重复支付！");
-            }
-            //根据订单总价格扣减用户余额
-            userMapper.updateByPrimaryKeySelective(
-                    User.builder()
-                            .id(userId)
-                            .money(money - order.getPrice())
-                            .build()
-            );
-            //改变订单支付状态
-            orderMapper.updateByPrimaryKeySelective(
-                    Order.builder()
-                    .id(orderId)
-                    .status(1)
-                    .build()
-            );
-            //记录支付信息
-            payInfoMapper.insertSelective(
-                    PayInfo.builder()
-                    .userId(userId)
-                    .orderId(orderId)
-                    .createTime(new Date())
-                    .build()
-            );
-        }
+//        //获取购物车信息
+//        Integer userId = shoppingCartDTO.getUserId();
+//        List<Integer> orderIds = shoppingCartDTO.getOrderIds();
+//        Integer totalPrice = shoppingCartDTO.getTotalPrice();
+//        //获取支付用户初始信息,判断用户余额是否足够完成支付
+//        User user = userMapper.selectByPrimaryKey(userId);
+//        Float money = user.getMoney();
+//        if (money < totalPrice) {
+//            throw new PayException("用户余额不足！");
+//        }
+//        //循环为所有订单付款
+//        for (Integer orderId : orderIds) {
+//            //获取订单信息并判断订单是否已经被支付了
+//            Order order = orderMapper.selectByPrimaryKey(orderId);
+//            if (order.getStatus() == 1) {
+//                throw new PayException("订单已支付，无法重复支付！");
+//            }
+//            //根据订单总价格扣减用户余额
+//            userMapper.updateByPrimaryKeySelective(
+//                    User.builder()
+//                            .id(userId)
+//                            .money(money - order.getPrice())
+//                            .build()
+//            );
+//            //改变订单支付状态
+//            orderMapper.updateByPrimaryKeySelective(
+//                    Order.builder()
+//                    .id(orderId)
+//                    .status(1)
+//                    .build()
+//            );
+//            //记录支付信息
+//            payInfoMapper.insertSelective(
+//                    PayInfo.builder()
+//                    .userId(userId)
+//                    .orderId(orderId)
+//                    .createTime(new Date())
+//                    .build()
+//            );
+//        }
         return true;
     }
 

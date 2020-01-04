@@ -8,4 +8,4 @@ from `user`
   left join collection as brand_collection on `user`.id = brand_collection.user_id and brand_collection.type = 'brand'
   left join footprint on `user`.id = footprint.user_id
   left join `order` on `user`.id = `order`.user_id
-where `user`.openId = 'asdfsadf'
+where `user`.open_id = #{openId}

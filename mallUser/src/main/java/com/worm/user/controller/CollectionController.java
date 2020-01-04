@@ -2,6 +2,7 @@ package com.worm.user.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.worm.constant.UserConstant;
+import com.worm.user.domain.dto.CommodityCollectionDTO;
 import com.worm.user.domain.entity.Collection;
 import com.worm.user.service.CollectionService;
 import com.worm.utils.JsonResult;
@@ -45,18 +46,21 @@ public class CollectionController {
         return JsonResult.ok(result);
     }
 
-    @GetMapping("/getAllCollection/{type}")
+    @GetMapping("/findAllCollection/{type}")
     @ApiOperation("分页查询用户收藏API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "type", value = "收藏事物的类型", dataType = "String", paramType = "path"),
             @ApiImplicitParam(name = "page", value = "分页查询的页码，默认为1", dataType = "int", paramType = "query")
     })
-    public JsonResult getAllCollection(@RequestAttribute("userId") Integer userId, @PathVariable("type") String type, @RequestParam(required = false, defaultValue = "1") Integer page) {
+    public JsonResult findAllCollection(@RequestAttribute("userId") Integer userId, @PathVariable("type") String type, @RequestParam(required = false, defaultValue = "1") Integer page) {
         Collection collection = Collection.builder()
                 .userId(userId)
                 .type(type)
                 .build();
-        PageInfo<Collection> pageInfo = collectionService.findPage(page, UserConstant.CollectionPageSize, collection);
+        PageInfo<CommodityCollectionDTO> pageInfo = null;
+        if (type.equals("commodity")) {
+            pageInfo = collectionService.findAllCommodityCollection(page, UserConstant.CollectionPageSize, collection);
+        }
         return JsonResult.ok(pageInfo);
     }
 }

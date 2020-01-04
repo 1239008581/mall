@@ -31,7 +31,6 @@ public class UserController {
             @ApiImplicitParam(name = "avatarUrl", value = "微信端传来的用户头像地址", dataType = "String", paramType = "query")
     })
     public JsonResult login(String code, String wxNickname, String avatarUrl) throws WxErrorException {
-        System.out.println(code);
         WxMaJscode2SessionResult sessionInfo = wxMaService.getUserService().getSessionInfo(code);
         String openId = sessionInfo.getOpenid();
         UserDTO userDTO = userService.login(openId, wxNickname, avatarUrl);

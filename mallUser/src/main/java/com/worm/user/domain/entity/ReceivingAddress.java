@@ -27,9 +27,19 @@ public class ReceivingAddress {
     private Integer userId;
 
     /**
-     * 收货区域
+     * 收货省
      */
-    private String region;
+    private String province;
+
+    /**
+     * 收货城市
+     */
+    private String city;
+
+    /**
+     * 收货县/区
+     */
+    private String area;
 
     /**
      * 详细地址

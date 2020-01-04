@@ -34,12 +34,13 @@ public class OrderController {
     @ApiOperation("用户购物车支付API")
     @ApiImplicitParam(name = "shoppingCartDTO", value = "需要支付的购物车信息，订单id列表和总价不能为空", dataType = "ShoppingCartDTO", paramType = "body")
     public JsonResult payOrders(@RequestAttribute("userId") Integer userId, @RequestBody ShoppingCartDTO shoppingCartDTO) throws PayException {
-        if (shoppingCartDTO.getTotalPrice() == null || shoppingCartDTO.getOrderIds() == null) {
-            throw new IllegalArgumentException("缺少必要参数！");
-        }
-        shoppingCartDTO.setUserId(userId);
-        Boolean result = orderService.payOrders(shoppingCartDTO);
-        return JsonResult.ok(result);
+//        if (shoppingCartDTO.getTotalPrice() == null || shoppingCartDTO.getOrderIds() == null) {
+//            throw new IllegalArgumentException("缺少必要参数！");
+//        }
+//        shoppingCartDTO.setUserId(userId);
+//        Boolean result = orderService.payOrders(shoppingCartDTO);
+//        return JsonResult.ok(result);
+        return null;
     }
 
     @PostMapping("/addOrder")

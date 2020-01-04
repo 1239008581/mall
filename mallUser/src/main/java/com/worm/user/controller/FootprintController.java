@@ -2,14 +2,13 @@ package com.worm.user.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.worm.constant.UserConstant;
+import com.worm.user.domain.dto.FootprintDTO;
 import com.worm.user.domain.entity.Footprint;
 import com.worm.user.service.FootprintService;
 import com.worm.utils.JsonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,14 +24,14 @@ public class FootprintController {
 
     private final FootprintService footprintService;
 
-    @GetMapping("/getALlFootprint")
+    @GetMapping("/findAllFootprint")
     @ApiOperation("分页查询用户足迹API")
     @ApiImplicitParam(name = "page", value = "从前端传来的页码，默认为1", dataType = "int", paramType = "path")
-    public JsonResult getALlFootprint(@RequestAttribute("userId") Integer userId, @RequestParam(required = false, defaultValue = "1") Integer page) {
+    public JsonResult findAllFootprint(@RequestAttribute("userId") Integer userId, @RequestParam(required = false, defaultValue = "1") Integer page) {
         Footprint footprint = Footprint.builder()
                 .userId(userId)
                 .build();
-        PageInfo<Footprint> pageInfo = footprintService.findPage(page, UserConstant.FootprintPageSize, footprint);
+        PageInfo<FootprintDTO> pageInfo = footprintService.findAllFootprint(page, UserConstant.FootprintPageSize, footprint);
         return JsonResult.ok(pageInfo);
     }
 
@@ -58,7 +57,6 @@ public class FootprintController {
     @ApiOperation("添加用户足迹API")
     @ApiImplicitParam(name = "footprint", value = "添加足迹的信息，商品id不能为空", dataType = "Footprint", paramType = "body")
     public Integer addFootprint(@RequestAttribute("userId") Integer userId, @RequestBody Footprint footprint) {
-        System.out.println(footprint.toString());
         if (footprint.getCommodityId() == null) {
             throw new IllegalArgumentException("缺少必要参数！");
         }
