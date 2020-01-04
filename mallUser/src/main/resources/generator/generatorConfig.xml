@@ -36,24 +36,24 @@
                              type="XMLMAPPER"/>
 
         <!--为哪张表生成代码-->
-        <table tableName="collection">
+        <table tableName="shopping">
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 
-        <table tableName="footprint">
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
+        <!--<table tableName="footprint">-->
+            <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
 
-        <table tableName="order">
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
+        <!--<table tableName="order">-->
+            <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
 
-        <table tableName="pay_info">
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
+        <!--<table tableName="pay_info">-->
+            <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
 
-        <table tableName="user">
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
+        <!--<table tableName="user">-->
+            <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

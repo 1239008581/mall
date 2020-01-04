@@ -10,4 +10,6 @@ public class UserConstant {
 
     public final static Integer ReceivingAddressPageSize = 10;
 
+    public final static Integer ShoppingPageSize = 6;
+
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api("商品分类相关功能接口")
+@Api(tags = "商品分类相关功能接口")
 @RestController
 @RequestMapping("/classify")
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))

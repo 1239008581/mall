@@ -70,18 +70,5 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, OrderMapper> implem
         return true;
     }
 
-    @Override
-    public int updateOrderCommodityNum(Order order) {
-        //获取订单信息
-        Order realOrder = orderMapper.selectByPrimaryKey(order.getId());
-        //判断是否已支付，已支付则无法修改
-        if (realOrder.getStatus() == 1) {
-            throw new PayException("订单已支付，无法修改！");
-        }
-        //修改数量和金额
-        float unitPrice = realOrder.getPrice() / realOrder.getCommodityNum();
-        order.setPrice(unitPrice * order.getCommodityNum());
-        int result = orderMapper.updateByPrimaryKeySelective(order);
-        return result;
-    }
+
 }

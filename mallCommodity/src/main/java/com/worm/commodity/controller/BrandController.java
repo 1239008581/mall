@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api("商品品牌相关接口")
+@Api(tags = "商品品牌相关接口")
 @RestController
 @RequestMapping("/brand")
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))

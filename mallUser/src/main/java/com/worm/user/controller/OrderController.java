@@ -51,7 +51,6 @@ public class OrderController {
             throw new IllegalArgumentException("缺少必要参数！");
         }
         CommodityDTO commodity = commodityFeignClient.findCommodity(commodityId);
-        System.out.println(commodity);
         if (commodity.getId() == null) {
             throw new IllegalArgumentException("参数错误，此商品不存在！");
         }
@@ -99,16 +98,7 @@ public class OrderController {
         return JsonResult.ok(pageInfo);
     }
 
-    @PostMapping("/updateOrderCommodityNum")
-    @ApiOperation("修改订单商品数量API")
-    @ApiImplicitParam(name = "order", value = "订单对象，必须包含订单id和数量两项", dataType = "Order", paramType = "body")
-    public JsonResult updateOrderCommodityNum(@RequestBody Order order) {
-        if (order.getId() == null || order.getCommodityNum() == null) {
-            throw new IllegalArgumentException("缺少必要参数！");
-        }
-        int result = orderService.updateOrderCommodityNum(order);
-        return JsonResult.ok(result);
-    }
+
 
 
 }

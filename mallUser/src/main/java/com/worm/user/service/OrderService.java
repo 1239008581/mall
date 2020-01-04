@@ -17,10 +17,4 @@ public interface OrderService extends BaseService<Order> {
      */
     Boolean payOrders(ShoppingCartDTO shoppingCartDTO) throws PayException;
 
-    /**
-     * 修改订单商品数量
-     * @param order
-     * @return
-     */
-    int updateOrderCommodityNum(Order order);
 }
