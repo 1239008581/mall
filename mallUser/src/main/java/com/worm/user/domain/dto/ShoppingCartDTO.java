@@ -23,9 +23,9 @@ public class ShoppingCartDTO {
     private Integer userId;
 
     /**
-     * 订单id列表
+     * 购物信息id列表
      */
-    private List<Integer> orderIds;
+    private List<Integer> shoppingIds;
 
     /**
      * 总价

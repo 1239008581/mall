@@ -3,6 +3,7 @@ package com.worm.user.controller;
 import com.github.pagehelper.PageInfo;
 import com.worm.constant.UserConstant;
 import com.worm.user.domain.dto.CommodityDTO;
+import com.worm.user.domain.dto.OrderDTO;
 import com.worm.user.domain.dto.ShoppingCartDTO;
 import com.worm.user.domain.entity.Order;
 import com.worm.user.feignclient.CommodityFeignClient;
@@ -28,7 +29,6 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
-    private final CommodityFeignClient commodityFeignClient;
 
     @PostMapping("/payOrders")
     @ApiOperation("用户购物车支付API")
@@ -46,21 +46,12 @@ public class OrderController {
     @PostMapping("/addOrder")
     @ApiOperation("用户增加订单API")
     @ApiImplicitParam(name = "order", value = "增加订单的信息，商品id不能为空", dataType = "Order", paramType = "body")
-    public JsonResult addOrder(@RequestAttribute("userId") Integer userId, @RequestBody Order order) {
-        Integer commodityId = order.getCommodityId();
-        if (commodityId == null) {
+    public OrderDTO addOrder(@RequestAttribute("userId") Integer userId, @RequestBody Order order) {
+        if (order.getCommodityId() == null) {
             throw new IllegalArgumentException("缺少必要参数！");
         }
-        CommodityDTO commodity = commodityFeignClient.findCommodity(commodityId);
-        if (commodity.getId() == null) {
-            throw new IllegalArgumentException("参数错误，此商品不存在！");
-        }
-        Integer commodityNum = (order.getCommodityNum() == null ? 1 : order.getCommodityNum());
-        order.setPrice(commodity.getPrice() * commodityNum);
         order.setUserId(userId);
-        order.setCreateTime(new Date());
-        int result = orderService.insert(order);
-        return JsonResult.ok(result);
+        return orderService.addOrder(order);
     }
 
     @PostMapping("/removeOrder")
@@ -86,15 +77,18 @@ public class OrderController {
             @ApiImplicitParam(name = "page", value = "分页查询的页码", dataType = "int", paramType = "query")
     })
     public JsonResult findAllOrder(@RequestAttribute("userId") Integer userId, @PathVariable("status") Integer status, @RequestParam(required = false, defaultValue = "1") Integer page) {
-        PageInfo<Order> pageInfo;
+        PageInfo<OrderDTO> pageInfo;
         if (status != 2) {
             Order order = Order.builder()
                     .userId(userId)
                     .status(status)
                     .build();
-            pageInfo = orderService.findPage(page, UserConstant.OrderPageSize, order);
+            pageInfo = orderService.findAllOrder(page, UserConstant.OrderPageSize, order);
         } else {
-            pageInfo = orderService.findAllPage(page, UserConstant.OrderPageSize);
+            Order order = Order.builder()
+                    .userId(userId)
+                    .build();
+            pageInfo = orderService.findAllOrder(page, UserConstant.OrderPageSize,order);
         }
         return JsonResult.ok(pageInfo);
     }

@@ -40,11 +40,6 @@ public class Order {
     private Integer commodityNum;
 
     /**
-     * 订单总价格
-     */
-    private Float price;
-
-    /**
      * 订单是否已支付 0：未支付；1：已支付
      */
     private Integer status;

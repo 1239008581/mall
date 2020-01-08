@@ -37,10 +37,4 @@ public class Shopping {
      */
     @Column(name = "commodity_num")
     private Integer commodityNum;
-
-    /**
-     * 总金额
-     */
-    @Column(name = "total_price")
-    private Float totalPrice;
 }

@@ -9,6 +9,5 @@
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="commodity_id" jdbcType="INTEGER" property="commodityId" />
     <result column="commodity_num" jdbcType="INTEGER" property="commodityNum" />
-    <result column="total_price" jdbcType="REAL" property="totalPrice" />
   </resultMap>
 </mapper>

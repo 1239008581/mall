@@ -30,7 +30,7 @@ public class CommodityController {
     @ApiOperation("查询商品API")
     @ApiImplicitParam(name = "id", value = "查询商品的id", dataType = "int", paramType = "path")
     public Commodity findCommodity(@RequestAttribute("userId") Integer userId, @PathVariable("id") Integer id) {
-        if (userId != null) {
+        if (userId != -1) {
             userFeignClient.addFootprint(
                     FootprintDTO.builder()
                             .commodityId(id)

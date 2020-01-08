@@ -23,6 +23,10 @@ public class HeaderTokenInterceptor extends HandlerInterceptorAdapter {
         try{
             //获取token，并判断token是否已过期
             String token = request.getHeader("X-Token");
+            if (token == null) {
+                request.setAttribute("userId",-1);
+                return true;
+            }
             if (!jwtOperator.validateToken(token)) {
                 throw new SecurityException("token解析错误！");
             }
