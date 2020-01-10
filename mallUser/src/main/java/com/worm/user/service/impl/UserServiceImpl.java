@@ -1,11 +1,13 @@
 package com.worm.user.service.impl;
 
+import com.worm.constant.UserConstant;
 import com.worm.service.impl.BaseServiceImpl;
 import com.worm.user.dao.UserMapper;
 import com.worm.user.domain.dto.UserDTO;
 import com.worm.user.domain.entity.User;
 import com.worm.user.service.UserService;
 import com.worm.utils.JwtOperator;
+import com.worm.utils.RedisOperator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
 
     private final UserMapper userMapper;
     private final JwtOperator jwtOperator;
+    private final RedisOperator redisOperator;
 
     @Override
     public UserDTO login(String openId, String wxNickname, String avatarUrl) {
@@ -39,9 +42,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
         }
         //2：获取该用户所有的信息，并将用户id加密，返回给前端
         UserDTO userALlInfo = userMapper.getUserALlInfo(openId);
-        Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("userId", userALlInfo.getId());
-        String token = jwtOperator.generateToken(userInfo);
+        Map<String, Object> map = new HashMap<>();
+        String key = UserConstant.USER_TOKEN + userALlInfo.getId();
+        redisOperator.set(key,userALlInfo.getId(),1209600);
+        map.put("key", key);
+        String token = jwtOperator.generateToken(map);
         userALlInfo.setId(token);
         return userALlInfo;
     }
